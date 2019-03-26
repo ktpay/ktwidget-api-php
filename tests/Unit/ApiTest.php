@@ -17,5 +17,7 @@ final class ApiTest extends TestCase
         $this->assertEquals(true, !$response->fail(), $response->message());
 
         $this->assertEquals(true, $response->verify('asdadad'), 'Message not verified');
+
+        dd($response);
     }
 }
