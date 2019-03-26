@@ -8,16 +8,9 @@ final class ApiTest extends TestCase
 {
     public function testPaymentCreate(): void
     {
-        $payment = $this->payment();
-
-        $response = $payment->create([
-            ''
-        ]);
-
-        $this->assertEquals(true, !$response->fail(), $response->message());
-
-        $this->assertEquals(true, $response->verify('asdadad'), 'Message not verified');
-
-        dd($response);
+        $request = $this->createApiRequest();
+        $response = $request->paymentCreate([]);
+        $this->isRequestSuccess($response);
+        $this->assertEquals(true, $response->verify(), 'Message not verified');
     }
 }
