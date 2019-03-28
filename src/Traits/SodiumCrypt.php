@@ -11,7 +11,12 @@ trait SodiumCrypt
      */
     public function encrypt(string $key, array $data): string
     {
-        return sodium_crypto_box_seal($this->toJsonString($data), base64_decode($key));
+        return base64_encode(
+            sodium_crypto_box_seal(
+                $this->toJsonString($data),
+                base64_decode($key)
+            )
+        );
     }
 
     /**

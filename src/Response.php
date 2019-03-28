@@ -12,7 +12,7 @@ class Response
 
     protected $code = 500;
 
-    protected $message = null;
+    protected $messages = [];
 
     protected $data = [];
 
@@ -24,12 +24,18 @@ class Response
             $this->success = true;
         }
 
-        $payload = json_decode($response->getBody()->getContents());
+        $contents = $response->getBody()->getContents();
+        $payload = json_decode($contents, false, 512, JSON_UNESCAPED_UNICODE);
 
-        if ($payload->response->status !== 'ok') {
-            $this->success = false;
-            $this->message = implode(' | ', (array) $payload->error);
+        if (!is_null($payload) && property_exists($payload, 'response')) {
             $this->data = $payload->response->data;
+
+            if ($payload->response->status !== 'ok') {
+                $this->success = false;
+                $this->messages = (array) $payload->error;
+            }
+        } else {
+            $this->messages = [$contents];
         }
     }
 
@@ -38,9 +44,14 @@ class Response
         return $this->success;
     }
 
-    public function message(): string
+    public function messages(): array
     {
-        return $this->message;
+        return $this->messages;
+    }
+
+    public function message(string $glue = ' | '): string
+    {
+        return implode($glue, $this->messages);
     }
 
     public function data(): array

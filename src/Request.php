@@ -39,8 +39,6 @@ class Request
             'base_uri' => sprintf(static::$test ? static::URL_TEST : static::URL, static::CURRENT_API_VERSION),
             'http_errors' => false,
             'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
                 'Auth-Identifier' => $appKey
             ],
         ]);
@@ -64,12 +62,11 @@ class Request
     public function callApi(string $method, string $uri, array $payload)
     {
         try {
-            $res = $this->httpClient->request(
-                $method, $uri, [
+            $res = $this->httpClient->request($method, $uri, [
                 'body' => $this->encrypt($this->key, $payload),
             ]);
         } catch (GuzzleException $e) {
-            dd($e);
+            dd($e->getMessage(), $e);
         }
 
         return new Response($res);
