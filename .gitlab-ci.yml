@@ -14,6 +14,10 @@ before_script:
   - php -r "unlink('composer-setup.php');"
   - composer install
 
+stages:
+  - test
+
 test:sdk:
+  stage: test
   script:
-    - KTPAYAPI_APP_KEY=%CI_JOB_APP_KEY%;KTPAYAPI_KEY=%CI_JOB_KEY% ./vendor/bin/phpunit
+    - KTPAYAPI_APP_KEY=$CI_JOB_APP_KEY;KTPAYAPI_KEY=$CI_JOB_KEY ./vendor/bin/phpunit
