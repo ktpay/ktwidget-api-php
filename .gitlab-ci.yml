@@ -5,9 +5,13 @@ cache:
     - vendor/
 
 before_script:
-   # Install composer dependencies
   - apt-get update -yqq
   - apt-get install git -yqq
+  # Install & enable Xdebug for code coverage reports
+  - pecl install xdebug
+  - docker-php-ext-enable xdebug
+
+  # Install composer dependencies
   - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   - php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'.PHP_EOL; } else { unlink('composer-setup.php'); die('Installer corrupt'.PHP_EOL); };"
   - php composer-setup.php --install-dir=/usr/bin --filename=composer
