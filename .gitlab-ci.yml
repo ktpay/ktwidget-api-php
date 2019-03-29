@@ -1,5 +1,9 @@
 image: php:7.2
 
+cache:
+  paths:
+    - vendor/
+
 before_script:
    # Install composer dependencies
   - apt-get update -yqq
@@ -12,4 +16,4 @@ before_script:
 
 test:sdk:
   script:
-    - KTPAYAPI_APP_KEY=%CI_JOB_APP_KEY%;KTPAYAPI_KEY=%CI_JOB_KEY% phpunit
+    - KTPAYAPI_APP_KEY=%CI_JOB_APP_KEY%;KTPAYAPI_KEY=%CI_JOB_KEY% ./vendor/bin/phpunit
