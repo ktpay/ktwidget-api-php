@@ -1,0 +1,13 @@
+image: php:7.2
+
+before_script:
+   # Install composer dependencies
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'.PHP_EOL; } else { unlink('composer-setup.php'); die('Installer corrupt'.PHP_EOL); };"
+  - php composer-setup.php --install-dir=/usr/bin --filename=composer
+  - php -r "unlink('composer-setup.php');"
+  - composer install
+
+test:sdk:
+  script:
+    - KTPAYAPI_APP_KEY=%CI_JOB_APP_KEY%;KTPAYAPI_KEY=%CI_JOB_KEY% phpunit
