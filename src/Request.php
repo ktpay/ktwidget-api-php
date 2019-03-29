@@ -1,10 +1,10 @@
 <?php
-namespace KTpay\Api;
+namespace KTWidget\Merchant;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use KTpay\Api\Traits\Payment;
-Use KTpay\Api\Traits\SodiumCrypt;
+use KTWidget\Merchant\Traits\Payment;
+Use KTWidget\Merchant\Traits\SodiumCrypt;
 
 class Request
 {
@@ -57,7 +57,7 @@ class Request
      * @param $method
      * @param $uri
      * @param $payload
-     * @return \KTpay\Api\Response
+     * @return \KTWidget\Merchant\Response
      */
     public function callApi(string $method, string $uri, array $payload)
     {

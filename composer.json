@@ -1,10 +1,10 @@
 {
-    "name": "ktpay/merchant-api-php",
+    "name": "ktpay/ktwidget-sdk-php",
     "description": "PHP client for ktwidget",
     "homepage": "https://ktpay.kz",
     "support": {
-        "issues": "https://github.com/ktpay/merchant-api-php/issues",
-        "source": "https://github.com/ktpay/merchant-api-php"
+        "issues": "https://github.com/ktpay/ktwidget-sdk-php/issues",
+        "source": "https://github.com/ktpay/ktwidget-sdk-php"
     },
     "type": "library",
     "license": "MIT",
@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "KTpay\\Api\\": "src/",
+            "KTWidget\\Merchant\\": "src/",
             "Tests\\": "tests/"
         }
     },

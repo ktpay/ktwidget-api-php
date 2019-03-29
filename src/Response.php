@@ -1,8 +1,8 @@
 <?php
-namespace KTpay\Api;
+namespace KTWidget\Merchant;
 
 use GuzzleHttp\Psr7\Response as BaseResponse;
-use KTpay\Api\Traits\SodiumCrypt;
+use KTWidget\Merchant\Traits\SodiumCrypt;
 
 class Response
 {

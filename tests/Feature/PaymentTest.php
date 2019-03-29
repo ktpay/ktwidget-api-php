@@ -14,13 +14,6 @@ final class PaymentTest extends TestCase
         //$apiUnit->testPaymentClearing();
     }
 
-    public function testPaymentCancel(): void
-    {
-        $apiUnit = $this->getUnit();
-        $apiUnit->testPaymentCreate();
-        //$apiUnit->testPaymentRefund();
-    }
-
     public function getUnit()
     {
         return new PaymentApiTest();

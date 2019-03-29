@@ -1,5 +1,5 @@
 <?php
-namespace KTpay\Api\Traits;
+namespace KTWidget\Merchant\Traits;
 
 trait Payment
 {
@@ -7,7 +7,7 @@ trait Payment
      * Create payment
      *
      * @param array $payloads
-     * @return \KTpay\Api\Response
+     * @return \KTWidget\Merchant\Response
      */
     public function paymentCreate(array $payloads)
     {

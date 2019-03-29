@@ -4,11 +4,11 @@
 First download and install [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos).
 In our project root directory
 ```bash
-[user@localhost /var/www/my-awesome-project]$ composer require ktpay/xxx
+composer require ktpay/ktwidget-sdk-php
 ```
 On production environment
 ```bash
-[user@localhost /var/www/my-awesome-project]$ composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
+composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
 ```
 If your project has not been used `composer` before:
   - Load `require_once __DIR__ . './vendor/autoload.php';` bootstrap in our "main" file 
@@ -18,7 +18,7 @@ If your project has not been used `composer` before:
 ```php
 $appID = "xxx";
 $appKey = "xxx";
-$apiRequest = new \KTpay\Api\Request($appID, $appKey);
+$apiRequest = new \KTWidget\Merchant\Request($appID, $appKey);
 
 $response = $apiRequest->nameOfApiMethod(['data' => []]);
 

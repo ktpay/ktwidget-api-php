@@ -1,5 +1,5 @@
 <?php
-namespace KTpay\Api\Traits;
+namespace KTWidget\Merchant\Traits;
 
 trait SodiumCrypt
 {
@@ -23,9 +23,9 @@ trait SodiumCrypt
      *
      * @param string $key
      * @param string $encrypted
-     * @return bool
+     * @return mixed
      */
-    public function decrypt(string $key, string $encrypted): bool
+    public function decrypt(string $key, string $encrypted)
     {
         $jsonString = sodium_crypto_box_seal_open($encrypted, base64_decode($key));
 
@@ -33,6 +33,7 @@ trait SodiumCrypt
             return json_decode($jsonString, JSON_UNESCAPED_UNICODE);
         }
 
+        return false;
     }
 
     public function toJsonString(array $data = []): string
