@@ -1,4 +1,6 @@
 # KTWidget API client (Language PHP)
+[![pipeline status](https://gitlab.com/nplustech/ktwidget-sdk-php/badges/master/pipeline.svg)](https://gitlab.com/nplustech/ktwidget-sdk-php/commits/master)
+[![coverage report](https://gitlab.com/nplustech/ktwidget-sdk-php/badges/master/coverage.svg)](https://gitlab.com/nplustech/ktwidget-sdk-php/commits/master)
 
 ### Installation
 First download and install [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos).
