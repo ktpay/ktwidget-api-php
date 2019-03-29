@@ -25,10 +25,13 @@ abstract class TestCase extends BaseCase
      */
     protected function createApiRequest()
     {
-        return new Request(
-            getenv('KTPAYAPI_APP_KEY'),
-            "gBvdrvZhiMg12sICet9l82Mtn1XNVn/ekdJhx61U+VA="
-        );
+        $appKey = getenv('KTPAYAPI_APP_KEY');
+        $key = getenv('KTPAYAPI_KEY');
+
+        $this->assertNotEquals(false, $appKey, "App key not set");
+        $this->assertNotEquals(false, $key, "Key not set");
+
+        return new Request($appKey, $key);
     }
 
     /**
