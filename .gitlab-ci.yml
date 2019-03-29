@@ -1,9 +1,5 @@
 image: php:7.2
 
-cache:
-  paths:
-    - vendor/
-
 before_script:
   - apt-get update -yqq
   - apt-get install git -yqq
@@ -16,16 +12,25 @@ before_script:
   - php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'.PHP_EOL; } else { unlink('composer-setup.php'); die('Installer corrupt'.PHP_EOL); };"
   - php composer-setup.php --install-dir=/usr/bin --filename=composer
   - php -r "unlink('composer-setup.php');"
-  - composer install
 
 stages:
+  - build
   - test
 
 variables:
   KTPAYAPI_APP_KEY: $CI_JOB_APP_KEY
   KTPAYAPI_KEY: $CI_JOB_KEY
 
-test:sdk:
+Building library:
+  stage: build
+  script:
+    - composer install
+
+Testing library:
   stage: test
   script:
     - ./vendor/bin/phpunit --coverage-text --colors=never
+
+cache:
+  paths:
+    - vendor/
