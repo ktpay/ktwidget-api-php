@@ -17,7 +17,11 @@ before_script:
 stages:
   - test
 
+variables:
+  KTPAYAPI_APP_KEY: $CI_JOB_APP_KEY
+  KTPAYAPI_KEY: $CI_JOB_KEY
+
 test:sdk:
   stage: test
   script:
-    - KTPAYAPI_APP_KEY=$CI_JOB_APP_KEY;KTPAYAPI_KEY=$CI_JOB_KEY ./vendor/bin/phpunit
+    - ./vendor/bin/phpunit
