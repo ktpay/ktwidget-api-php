@@ -1,22 +1,4 @@
-image: php:7.2
-
-before_script:
-  - apt-get update && apt-get install -yqq git zlib1g-dev libzip-dev
-  # Install & enable Xdebug for code coverage reports
-  - pecl install xdebug
-  - docker-php-ext-enable xdebug
-  - docker-php-ext-install zip
-  - docker-php-ext-enable zip
-
-  # Install composer dependencies
-  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  - php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'.PHP_EOL; } else { unlink('composer-setup.php'); die('Installer corrupt'.PHP_EOL); };"
-  - php composer-setup.php --install-dir=/usr/bin --filename=composer
-  - php -r "unlink('composer-setup.php');"
-
-  # Install php cs dependencies
-  - composer global require "squizlabs/php_codesniffer=*"
-  - ln -s `composer global config bin-dir --absolute`/phpcs /usr/bin
+image: registry.gitlab.com/nplustech/php-pipeline
 
 stages:
   - syntax
