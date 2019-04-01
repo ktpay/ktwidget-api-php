@@ -4,7 +4,7 @@ namespace KTWidget\Merchant;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use KTWidget\Merchant\Traits\Payment;
-Use KTWidget\Merchant\Traits\SodiumCrypt;
+use KTWidget\Merchant\Traits\SodiumCrypt;
 
 class Request
 {
@@ -54,21 +54,21 @@ class Request
     /**
      * Call request to api
      *
-     * @param $method
-     * @param $uri
-     * @param $payload
+     * @param $method string
+     * @param $uri string
+     * @param $payload array
      * @return \KTWidget\Merchant\Response
      */
-    public function callApi(string $method, string $uri, array $payload)
+    public function callApi(string $method, string $uri, array $payload): Response
     {
         try {
             $res = $this->httpClient->request($method, $uri, [
                 'body' => $this->encrypt($this->key, $payload),
             ]);
+
+            return new Response($res);
         } catch (GuzzleException $e) {
             dd($e->getMessage(), $e);
         }
-
-        return new Response($res);
     }
 }
