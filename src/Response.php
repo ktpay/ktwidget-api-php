@@ -10,32 +10,27 @@ class Response
 
     protected $success = false;
 
-    protected $code = 500;
+    protected $code = 0;
 
     protected $messages = [];
 
     protected $data = [];
 
+    protected $hint = null;
+
     public function __construct(BaseResponse $response)
     {
-        $this->code = $response->getStatusCode();
-
-        if ($this->code === 200) {
-            $this->success = true;
-        }
-
         $contents = $response->getBody()->getContents();
         $payload = json_decode($contents, false, 512, JSON_UNESCAPED_UNICODE);
 
-        if (!is_null($payload) && property_exists($payload, 'response')) {
-            $this->data = $payload->response->data;
+        $this->success = $payload->response->success;
 
-            if ($payload->response->status !== 'ok') {
-                $this->success = false;
-                $this->messages = (array) $payload->error;
-            }
+        if ($this->success) {
+            $this->data = $payload->response->data;
         } else {
-            $this->messages = [$contents];
+            $this->code = $payload->error->code;
+            $this->messages = (array) $payload->error->messages;
+            $this->hint = $payload->error->hint;
         }
     }
 
@@ -57,5 +52,13 @@ class Response
     public function data(): array
     {
         return $this->data;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function hint(): ?string
+    {
+        return $this->hint;
     }
 }
