@@ -1,11 +1,12 @@
 image: php:7.2
 
 before_script:
-  - apt-get update -yqq
-  - apt-get install git -yqq
+  - apt-get update && apt-get install -yqq git zlib1g-dev libzip-dev
   # Install & enable Xdebug for code coverage reports
   - pecl install xdebug
   - docker-php-ext-enable xdebug
+  - docker-php-ext-install zip
+  - docker-php-ext-enable zip
 
   # Install composer dependencies
   - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -13,13 +14,24 @@ before_script:
   - php composer-setup.php --install-dir=/usr/bin --filename=composer
   - php -r "unlink('composer-setup.php');"
 
+  # Install php cs dependencies
+  - composer global require "squizlabs/php_codesniffer=*"
+  - ln -s `composer global config bin-dir --absolute`/phpcs /usr/bin
+
 stages:
+  - syntax
   - build
   - test
 
 variables:
   KTPAYAPI_APP_KEY: $CI_JOB_APP_KEY
   KTPAYAPI_KEY: $CI_JOB_KEY
+
+Verifying code syntax:
+  stage: syntax
+  script:
+    - phpcs --extensions=php -n --standard=PSR2 --encoding=utf-8 src/
+    #- git show --pretty="" --name-only $CI_COMMIT_SHA | grep "^ [MAC] .*\.php" | awk '{print $2}'
 
 Building library:
   stage: build
