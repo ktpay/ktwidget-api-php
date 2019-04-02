@@ -35,7 +35,18 @@ var_dump($response->data())
 ### Payment create
 ```php
 $response = $apiRequest->paymentCreate([
-    'amount' => 200.00
+    "order" => [
+        "amount" => 1000,
+        "order_id" => "Order1",
+        "description" => "Тестовая оплата за Order1",
+        "callback_back_url" => "https://our.store.kz",
+        "type" => "ecom",
+    ],
+    "user" => [
+        "merchant_user_id" => "user1",
+        "phone" => "+77001234567",
+        "email" => "test@example.com",
+    ]
 ]);
 ```
 ### Tests

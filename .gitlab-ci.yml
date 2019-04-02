@@ -9,11 +9,11 @@ variables:
   KTPAYAPI_APP_KEY: $CI_JOB_APP_KEY
   KTPAYAPI_KEY: $CI_JOB_KEY
 
-Verifying code syntax:
+code_quality:
   stage: syntax
   script:
-    - phpcs --extensions=php -n --standard=PSR2 --encoding=utf-8 src/
-    #- git show --pretty="" --name-only $CI_COMMIT_SHA | grep "^ [MAC] .*\.php" | awk '{print $2}'
+    - phpcs --report=full --extensions=php -n --standard=PSR2 --encoding=utf-8 src/
+  allow_failure: true
 
 Building library:
   stage: build
