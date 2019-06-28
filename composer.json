@@ -1,10 +1,10 @@
 {
-    "name": "nplustech/ktwidget-sdk-php",
+    "name": "ktpay/ktwidget-api-php",
     "description": "PHP client for ktwidget",
-    "homepage": "https://ktpay.kz",
+    "homepage": "https://widget.nplus.tech",
     "support": {
-        "issues": "https://github.com/ktpay/ktwidget-sdk-php/issues",
-        "source": "https://github.com/ktpay/ktwidget-sdk-php"
+        "issues": "https://github.com/ktpay/ktwidget-api-php/issues",
+        "source": "https://github.com/ktpay/ktwidget-api-php"
     },
     "type": "library",
     "license": "MIT",
