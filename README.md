@@ -6,7 +6,7 @@
 First download and install [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos).
 In our project root directory
 ```bash
-composer require ktpay/ktwidget-api-php
+composer require ktpay/ktwidget-api-php:dev-master
 ```
 On production environment
 ```bash
